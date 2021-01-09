@@ -1,4 +1,4 @@
-import random as rand, art, time
+import random as rand, day11art, time
 
 
 def deal_cards():
@@ -35,7 +35,7 @@ def compare(user_score, computer_score):
 
 
 def play_round():
-    print(art.logo)
+    print(day11art.logo)
     is_game_over = False
     count = 0
     user_cards = []
