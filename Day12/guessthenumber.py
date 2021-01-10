@@ -1,13 +1,15 @@
 import random as rand
 import day12art
 import time
+EASY_LEVEL_TURNS = 5
+HARD_LEVEL_TURNS = 10
 
 
 def difficulty_select(difficulty):
     if difficulty == 'hard':
-        return 5
+        return HARD_LEVEL_TURNS
     elif difficulty == 'easy':
-        return 10
+        return EASY_LEVEL_TURNS
     else:
         return False
 
