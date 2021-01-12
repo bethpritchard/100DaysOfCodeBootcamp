@@ -5,23 +5,26 @@ def user_input():
     return input("What would you like? (espresso/latte/cappuccino):").lower()
 
 
-# TODO: display after user input
 
-
-
-
-# TODO: take money in
 def money_in():
-    pass
+    dollars = int(input(f"Dollars: "))
+    quarters = int(input(f"Quarters: "))*0.25
+    cents = int(input(f"Cents: "))*0.01
+    money_paid = dollars + quarters + cents
+    return money_paid
 
 
-# TODO: process coins
+def count_money(money_paid, price):
+    global money
+    if money_paid > price:
+        money +=  price
+        print(f"Here is your ${round(money_paid - price, 2)} change.")
+        return True
+    else:
+        return False
 
-def count_money():
-    pass
 
 
-# TODO: print report
 def print_report():
     report = f'''
 Water: {resources['water']}
@@ -31,24 +34,22 @@ Money: ${money}'''
     return report
 
 
-# TODO: check resources
+
 def check_resources(coffee):
     for resource, value in coffee.items():
         if value > resources[resource]:
-            return f"Sorry, we are out of {resource}"
+            print(f"Sorry, we are out of {resource}.")
+            return False
         else:
-            return f"resources ok"
+            return True
 
 
-# TODO: check transaction
+def make_coffee(coffee):
+    for key in coffee:
+        resources[key] = resources[key] - coffee[key]
 
 
-# TODO: make coffee
-def make_coffee():
-    pass
-    # TODO: select coffee from data
-    # TODO: check resources
-    # if not enough resources then refund
+
 
 
 def invalid_choice():
@@ -60,8 +61,10 @@ def coffee_machine():
     Main function for coffee machine
     """
 
+    global chosen_coffee
     machine_on = True
     initial = True
+    enough_resources = True
 
     # User input and mode selection
     while machine_on:
@@ -72,12 +75,10 @@ def coffee_machine():
                 print(print_report())
                 break
             elif user_selection in MENU.keys():
+            # Main coffee function
                 chosen_coffee = MENU[user_selection]
-                print(f"chosen_coffee = {chosen_coffee}")
-                # TODO: fix this part
-                #
-                print(check_resources(chosen_coffee['ingredients']))
-                break
+                enough_resources = check_resources(chosen_coffee['ingredients'])
+
             elif user_selection == 'off':
                 print(f"Turning off.")
                 machine_on = False
@@ -85,6 +86,17 @@ def coffee_machine():
             else:
                 print(invalid_choice())
 
+
+            while enough_resources:
+                print(f"Please insert at least ${chosen_coffee['cost']}")
+                money_paid = money_in()
+                if count_money(money_paid, chosen_coffee['cost']):
+                    make_coffee(chosen_coffee['ingredients'])
+                    print(f"Here is your {user_selection}. ☕ Enjoy!")
+                    break
+                else:
+                    print(f"Sorry, that is not enough money. Money refunded.")
+                    break
 
 
 
