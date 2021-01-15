@@ -73,5 +73,4 @@ draw_line()
 
 
 
-
 screen.exitonclick()
