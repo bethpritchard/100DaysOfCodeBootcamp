@@ -49,9 +49,6 @@ def run_game():
                 game_is_on = False
                 scoreboard.game_over()
 
-
-
-
 run_game()
 
 screen.exitonclick()
