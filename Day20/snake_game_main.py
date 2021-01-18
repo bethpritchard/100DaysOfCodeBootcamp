@@ -41,7 +41,6 @@ def run_game():
         if abs(snake.head.xcor()) > (WIDTH / 2) - 10 or abs(snake.head.ycor()) > (HEIGHT / 2) - 10:
             game_is_on = False
             scoreboard.game_over()
-            print("OVER")
 
         # Detect collision with tail
         for segment in snake.segments[1:]:
