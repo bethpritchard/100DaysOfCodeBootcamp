@@ -33,7 +33,7 @@ class Snake(Turtle):
         self.add_segment(self.segments[-1].position())
 
     def move(self):
-        for seg_num in range(len(self.segments) - 1, 0, -1):
+        for seg_num in range(len(self.segments) - 1, 0, -1): #moves each turtle to positon of last one
             new_x = self.segments[seg_num - 1].xcor()
             new_y = self.segments[seg_num - 1].ycor()
             self.segments[seg_num].goto(new_x, new_y)

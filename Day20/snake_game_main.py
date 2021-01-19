@@ -2,7 +2,7 @@ from turtle import Screen
 import time
 from snake import Snake
 from food import Food
-from scoreboard import Scoreboard
+from snake_scoreboard import Scoreboard
 
 
 WIDTH = 600
