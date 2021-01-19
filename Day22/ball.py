@@ -28,7 +28,3 @@ class Ball(Turtle):
     def start_over(self):
         self.goto(0,0)
         self.bounce_x()
-
-
-
-
