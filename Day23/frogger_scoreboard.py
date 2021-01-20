@@ -6,7 +6,7 @@ ALIGNMENT = "center"
 class Scoreboard(Turtle):
     def __init__(self):
         super(Scoreboard, self).__init__()
-        self.score = 0
+        self.score = 1
         self.penup()
         self.goto(-200,260)
         self.hideturtle()

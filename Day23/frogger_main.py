@@ -3,6 +3,9 @@ from turtle import Screen
 from player import Player
 from car_manager import CarManager
 from frogger_scoreboard import Scoreboard
+Y_FINISH_LINE = 280
+HIT_DISTANCE = 25
+CAR_FREQUENCY = 5 #increase to get fewer cars
 
 screen = Screen()
 screen.setup(width=600, height=600)
@@ -23,7 +26,7 @@ while game_is_on:
     screen.update()
     loop_number += 1
     # Create new car
-    if loop_number % 6 == 0:
+    if loop_number % CAR_FREQUENCY == 0:
         new_car = CarManager()
         cars.append(new_car)
 
@@ -33,14 +36,14 @@ while game_is_on:
 
     # Detect collision
     for car in cars:
-        if car.distance(player) < 30:
+        if car.distance(player) < HIT_DISTANCE:
             print("squish")
             scoreboard.game_over()
             game_is_on = False
 
-    if player.ycor() > 280:
+    if player.ycor() > Y_FINISH_LINE:
         player.restart()
-        time.sleep(1)
+        time.sleep(0.5)
         scoreboard.increase_score()
 
 
