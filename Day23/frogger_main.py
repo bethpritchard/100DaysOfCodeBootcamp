@@ -41,6 +41,7 @@ while game_is_on:
             scoreboard.game_over()
             game_is_on = False
 
+
     if player.ycor() > Y_FINISH_LINE:
         player.restart()
         time.sleep(0.5)
