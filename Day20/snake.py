@@ -8,6 +8,8 @@ LEFT = 180
 RIGHT = 0
 
 
+
+
 class Snake(Turtle):
 
     def __init__(self):
