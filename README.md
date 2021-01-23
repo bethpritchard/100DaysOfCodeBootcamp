@@ -6,11 +6,12 @@ These are projects from 100 Days of Code Python [Udemy Course](https://www.udemy
 
 * [Day 11 - Blackjack](Day11)
 * [Day 12 - Guess the number](Day12)
-* [Day 14 - Higher lower game](Day14/)
+* [Day 14 - Higher lower game](Day14)
 * [Day 15 - Simulated coffee machine](Day15)
 * [Day 16 - OOP Coffee Machine](Day16)
 * [Day 17 - Quiz](Day17)
 * [Day 18 - Hirst painting](Day18)
 * [Day 19 - Turtle Race](Day19/turtle_race.py)
-* [Day 23- Pong](Day22)
-* [Day 24](Day24)
+* [Day 22- Pong](Day22)
+* [Day 23 - Frogger]
+* [Day 24 - Mail merge project](Day24)
