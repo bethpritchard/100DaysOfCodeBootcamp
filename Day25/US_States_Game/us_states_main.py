@@ -21,11 +21,18 @@ while len(states_guessed) < 51:
         missing_states = []
         for state in all_states:
             if state not in states_guessed:
-                missing_states.append(state)
+                t = turtle.Turtle()
+                t.hideturtle()
+                t.penup()
+                t.speed("fastest")
+                state_data = data[data.state == state]
+                t.goto(int(state_data.x), int(state_data.y))
+                t.write(state)
+
         new_data = pd.DataFrame(missing_states)
         new_data.to_csv("states_to_learn.csv")
         break
-    if answer_state in all_states:
+    if answer_state in all_states and answer_state not in states_guessed:
         states_guessed.append(answer_state)
 
         t = turtle.Turtle()
@@ -35,8 +42,6 @@ while len(states_guessed) < 51:
         state_data = data[data.state == answer_state]
         t.goto(int(state_data.x),int(state_data.y))
         t.write(answer_state)
-
-        missing_states.remove(answer_state)
 
 
 
