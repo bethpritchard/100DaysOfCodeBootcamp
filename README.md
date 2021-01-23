@@ -13,5 +13,5 @@ These are projects from 100 Days of Code Python [Udemy Course](https://www.udemy
 * [Day 18 - Hirst painting](Day18)
 * [Day 19 - Turtle Race](Day19/turtle_race.py)
 * [Day 22- Pong](Day22)
-* [Day 23 - Frogger]
+* [Day 23 - Frogger](Day23)
 * [Day 24 - Mail merge project](Day24)
