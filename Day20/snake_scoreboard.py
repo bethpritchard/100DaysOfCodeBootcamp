@@ -2,7 +2,7 @@ from turtle import Turtle
 
 FONT = ("Courier", 24, "normal")
 ALIGNMENT = "center"
-with open("snake_high_score.txt", mode="r") as file:
+with open("snake_high_score.txt", mode="r+") as file:
     HIGH_SCORE = file.read()
     HIGH_SCORE = int(HIGH_SCORE)
 
