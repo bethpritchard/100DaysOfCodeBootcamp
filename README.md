@@ -12,3 +12,5 @@ These are projects from 100 Days of Code Python [Udemy Course](https://www.udemy
 * [Day 17 - Quiz](Day17)
 * [Day 18 - Hirst painting](Day18)
 * [Day 19 - Turtle Race](Day19/turtle_race.py)
+* [Day 20]()
+* [Day 21]()
