@@ -25,12 +25,10 @@ def add_state(state, x, y):
 while len(states_guessed) < 51:
     answer_state = screen.textinput(title = f"{len(states_guessed)}/50 States Correct", prompt="Enter a state").title()
     if answer_state == "Exit":
-        missing_states = []
-        for state in all_states:
-            if state not in states_guessed:
-                state_data = data[data.state == state]
-                add_state(state,state_data.x, state_data.y)
-                missing_states.append(state)
+        missing_states = [state for state in all_states if state not in states_guessed]
+        for state in missing_states:
+            state_data = data[data.state == state]
+            add_state(state,state_data.x, state_data.y)
         new_data = pd.DataFrame(missing_states)
         new_data.to_csv("states_to_learn.csv")
         break
