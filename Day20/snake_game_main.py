@@ -23,6 +23,10 @@ screen.onkey(snake.move_up, "Up")
 screen.onkey(snake.move_down, "Down")
 screen.onkey(snake.move_left, "Left")
 screen.onkey(snake.move_right, "Right")
+print(type(snake.up()))
+print(type(snake.up))
+print(type(snake.segments))
+snake.up()
 
 
 game_is_on = True
@@ -50,3 +54,4 @@ while game_is_on:
             snake.reset_segments()
             scoreboard.reset_score()
 screen.exitonclick()
+
