@@ -15,3 +15,4 @@ These are projects from 100 Days of Code Python [Udemy Course](https://www.udemy
 * [Day 22- Pong](Day22)
 * [Day 23 - Frogger](Day23)
 * [Day 24 - Mail merge project](Day24)
+* [Day 25 - phonetic alphabet converter](Day26/NATO_alphabet/NATO_alph_main.py)
