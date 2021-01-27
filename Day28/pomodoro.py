@@ -6,20 +6,26 @@ RED = "#c05555"
 GREEN = "#59886b"
 YELLOW = "#fff8c1"
 FONT_NAME = "Courier"
-WORK_MIN = 0.25
-SHORT_BREAK_MIN = 0.5
-LONG_BREAK_MIN = 1
+WORK_MIN = 25
+SHORT_BREAK_MIN = 5
+LONG_BREAK_MIN = 20
 BG_IMG = "tomato.png"
-CHECKMARK = " ✓ "
+CHECKMARK = "✓"
 reps = 0
 num_checks = 0
 
 
 # ---------------------------- TIMER RESET ------------------------------- # 
 def reset_timer():
-    global reps
+    global reps, num_checks
+    window.after_cancel(timer)
     reps = 0
+    num_checks = 0
+    title_label.config(text="Timer", fg=GREEN)
     canvas.itemconfig(timer_text, text=f"00:00")
+    check_marks.config(text=CHECKMARK * num_checks)
+
+
 
 
 
@@ -28,47 +34,28 @@ def reset_timer():
 # ---------------------------- TIMER MECHANISM ------------------------------- # 
 
 def start_timer():
-    global reps, num_checks
+    global reps
     reps += 1
-    work_sec = WORK_MIN*60
-    short_break_sec = SHORT_BREAK_MIN*60
-    long_break_sec = LONG_BREAK_MIN*60
+    work_sec = int(WORK_MIN*60)
+    short_break_sec = int(SHORT_BREAK_MIN*60)
+    long_break_sec = int(LONG_BREAK_MIN*60)
 
 
     if reps == 8:
         count_down(long_break_sec)
-        num_checks = 0
-        title_label.config(text="BREAK", fg=RED)
+
+        title_label.config(text="BREAK", fg=ORANGE)
+
 
     elif reps % 2 == 0:
-        num_checks += 1
+
         count_down(short_break_sec)
         title_label.config(text="BREAK", fg=RED)
-        check_marks.config(text=CHECKMARK * num_checks)
+
 
     else:
-
         count_down(work_sec)
-        title_label.config(text="WORK", fg=ORANGE)
-    #if re
-    # while reps < 5:
-    #     if reps < 3:
-    #         title_label.config(text="WORK", fg=ORANGE)
-    #         count_down(work_sec)
-    #         title_label.config(text = "BREAK", fg = RED)
-    #         count_down(short_break_sec)
-    #         reps += 1
-    #     if reps == 4:
-    #         title_label.config(text="WORK", fg=ORANGE)
-    #         count_down(work_sec)
-    #         title_label.config(text = "BREAK", fg = ORANGE)
-    #         reps = 0
-
-
-
-
-
-
+        title_label.config(text="WORK", fg=GREEN)
 
 
 # ---------------------------- COUNTDOWN MECHANISM ------------------------------- #
@@ -81,9 +68,15 @@ def count_down(count):
 
     canvas.itemconfig(timer_text, text=f"{count_min}:{count_sec}")
     if count > 0:
-        window.after(1000,count_down,count-1)
+        global timer
+        timer = window.after(1000,count_down,count-1)
     else:
         start_timer()
+        marks = ""
+        work_sessions = math.floor(reps/2)
+        for _ in range(work_sessions):
+            marks += CHECKMARK
+        check_marks.config(text = marks)
 
 
 
