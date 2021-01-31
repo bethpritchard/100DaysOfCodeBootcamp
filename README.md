@@ -20,3 +20,4 @@ These are projects from 100 Days of Code Python [Udemy Course](https://www.udemy
 * [Day 27 - miles to km converter](Day27/distance_converter.py)
 * [Day 28 - Pomodoro timer](Day28)
 * [Day 29 - Password manager](Day29)
+* [Day 31 - Flash card app](Day31)
