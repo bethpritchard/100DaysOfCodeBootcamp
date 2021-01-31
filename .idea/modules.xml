@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$USER_HOME$/Documents/GitHub/100-Days-Of-Code/.idea/100-Days-Of-Code.iml" filepath="$USER_HOME$/Documents/GitHub/100-Days-Of-Code/.idea/100-Days-Of-Code.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/100DaysOfCodeBootcamp.iml" filepath="$PROJECT_DIR$/.idea/100DaysOfCodeBootcamp.iml" />
     </modules>
   </component>
