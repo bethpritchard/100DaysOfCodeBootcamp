@@ -1,5 +1,4 @@
 from tkinter import *
-from tkinter import messagebox
 import pandas
 import random as rand
 
@@ -34,27 +33,24 @@ def correct_card():
 def flip_card():
     translation = current_card['English']
     canvas.itemconfig(card_display, image=back_card)
-    canvas.itemconfig(title_text, text="English",fill="white")
-    canvas.itemconfig(word_text,text =translation,fill="white" )
+    canvas.itemconfig(title_text, text="English", fill="white")
+    canvas.itemconfig(word_text, text=translation, fill="white")
+
 
 # ----------------------- NEW FLASH CARD ---------------------
 
 
-
 def new_card():
-    global current_card,flip_timer
+    global current_card, flip_timer
     window.after_cancel(flip_timer)
     current_card = rand.choice(words_dict)
     new_word = current_card['French']
 
-
-    canvas.itemconfig(card_display,image=front_card)
-    canvas.itemconfig(title_text, text="French",fill="black")
-    canvas.itemconfig(word_text, text=new_word,fill="black")
+    canvas.itemconfig(card_display, image=front_card)
+    canvas.itemconfig(title_text, text="French", fill="black")
+    canvas.itemconfig(word_text, text=new_word, fill="black")
 
     flip_timer = window.after(3000, func=flip_card)
-
-
 
 
 # --------------------- UI BUILD ------------------------------
@@ -83,7 +79,6 @@ right_button.grid(column=2, row=2)
 wrong_image = PhotoImage(file=WRONG_IMG)
 wrong_button = Button(image=wrong_image, highlightthickness=0, borderwidth=0, command=new_card)
 wrong_button.grid(column=1, row=2)
-
 
 new_card()
 
