@@ -68,8 +68,6 @@ title_text = canvas.create_text(400, 150, text="Title", font=TITLE_FONT)
 word_text = canvas.create_text(400, 263, text="Word", font=WORD_FONT)
 canvas.grid(column=1, row=1, columnspan=2)
 
-# Labels
-
 # Right button
 right_image = PhotoImage(file=RIGHT_IMG)
 right_button = Button(image=right_image, highlightthickness=0, borderwidth=0, command=correct_card)
