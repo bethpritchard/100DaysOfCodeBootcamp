@@ -22,3 +22,4 @@ These are projects from 100 Days of Code Python [Udemy Course](https://www.udemy
 * [Day 29 - Password manager](Day29)
 * [Day 31 - Flash card app](Day31)
 * [Day 32 - Birthday wisher](Day32/birthday_wisher/birthday_wisher_main.py)
+* [Day 33 - ISS notifier](Day33/iss_notifier_main.py)
