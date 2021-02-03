@@ -2,8 +2,6 @@
 Edit CSV with emails to send
 """
 
-
-
 import smtplib
 import random
 import datetime as dt
