@@ -3,9 +3,10 @@ import requests
 from twilio.rest import Client
 from twilio.http.http_client import TwilioHttpClient
 
-OWD_KEY = "MY_KEY"
-OWD_URL = "https://api.openweathermap.org/data/2.5/onecall?"
-
+OWD_URL = "https://api.openweathermap.org/data/2.5/onecall"
+OWD_KEY = "06b95e007082c4a6a8271b60ce917fd6"
+account_sid = 'ACbaa3c082fa755d4ad5f3dbc44d01a643'
+auth_token = '27aab67bdfab27b20f14a04c02af26d6'
 
 OWD_PARAMS = {
     "lat": 54.326790,
@@ -23,23 +24,19 @@ will_rain = False
 
 for hour_data in weather_slice:
     weather_code = hour_data["weather"][0]["id"]
-    if int(weather_code) < 700:
+    if int(weather_code) > 700:
         will_rain = True
 
 if will_rain:
-    proxy_client = TwilioHttpClient(proxy={'http': os.environ['http_proxy'], 'https': os.environ['https_proxy']})
-
-    account_sid = "MY_ACCOUNT"
-    auth_token = "MY_KEY"
-
-    client = Client(account_sid, auth_token, http_client=proxy_client)
+    #proxy_client = TwilioHttpClient(proxy={'http': os.environ['http_proxy'], 'https': os.environ['https_proxy']})
+    client = Client(account_sid, auth_token)
 
 
     message = client.messages \
         .create(
-        body="Join Earth's mightiest heroes. Like Kevin Bacon.",
-        from_="VIRTUAL_NUMBER",
-        to="MY_NUMBER"
+        body="It's going to rain today. Remember to bring an ☔",
+        from_="+19014727436",
+        to="+447464994849"
     )
 
     print(message.status)
