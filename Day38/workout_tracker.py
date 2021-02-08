@@ -3,9 +3,9 @@ import requests
 import os
 
 GENDER = "female"
-WEIGHT_KG = YOUR WEIGHT
-HEIGHT_CM = YOUR HEIGHT
-AGE = YOUR AGE
+WEIGHT_KG = "82"
+HEIGHT_CM = "182"
+AGE = "23"
 
 
 APP_ID = os.environ.get("NUTRITIONIX_ID")
@@ -31,7 +31,11 @@ sheet_headers = {
 user_input = input("Enter exercise: ")
 
 exercise_params = {
-    "query": user_input
+    "query": user_input,
+    "gender": GENDER,
+    "weight_kg": WEIGHT_KG,
+    "height_cm": HEIGHT_CM,
+    "age": AGE
 }
 
 exercise_response = requests.post(
