@@ -6,7 +6,7 @@ from flight_search import FlightSearch
 from flight_data import FlightData
 from notification_manager import NotificationManager
 
-# TODO SWITCH TO GOOGLE API
+
 
 # TODO Step 4 of Day39
 "https://github.com/leba0495/100-Days-Of-Python-Journey/blob/main/Day39:40-flight-deal-finder/data_manager.py"
@@ -26,10 +26,10 @@ data_manager = DataManager()
 sheet_data = data_manager.get_destination_data()
 
 
-if sheet_data[0]["iataCode"] == "":
+if sheet_data[0]["IATA Code"] == "":
     flight_search = FlightSearch()
     for row in sheet_data:
-        row["iataCode"] = flight_search.get_destination_code(row["city"])
+        row["IATA Code"] = flight_search.get_destination_code(row["City"])
 
 
     print(f"Sheet Data: {sheet_data}")
