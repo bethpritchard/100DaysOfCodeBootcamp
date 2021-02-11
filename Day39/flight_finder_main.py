@@ -13,7 +13,7 @@ from notification_manager import NotificationManager
 
 
 tequila_key = os.environ.get("TEQUILA_KEY")
-print(tequila_key)
+
 
 tequila_endpoint = "https://tequila-api.kiwi.com/v2/search"
 
@@ -24,6 +24,7 @@ tequila_header = {
 
 data_manager = DataManager()
 sheet_data = data_manager.get_destination_data()
+print(sheet_data)
 
 
 if sheet_data[0]["IATA Code"] == "":
@@ -36,3 +37,12 @@ if sheet_data[0]["IATA Code"] == "":
 
     data_manager.destination_data = sheet_data
     data_manager.update_destination_codes()
+
+
+flight_data = FlightData()
+
+
+for city in sheet_data:
+    new_flight = flight_data.find_flight(city["IATA Code"])
+
+    print(f"{city['City']}: £{new_flight['price']}")
