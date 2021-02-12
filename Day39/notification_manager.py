@@ -17,7 +17,7 @@ class NotificationManager:
     def send_text(self,message):
         message = self.client.messages.create(
             body=message,
-            from_="+19014727436",
-            to="+447464994849",
+            from_=VIRTUAL_NUMBER,
+            to=MY_NUMBER,
         )
         print(message.sid)
