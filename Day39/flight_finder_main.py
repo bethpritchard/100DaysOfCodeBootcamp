@@ -6,9 +6,6 @@ from notification_manager import NotificationManager
 
 ORIGIN_CITY_IATA = "LON"
 
-# TODO Step 4 of Day39
-"https://github.com/leba0495/100-Days-Of-Python-Journey/blob/main/Day39:40-flight-deal-finder/data_manager.py"
-
 
 tequila_key = os.environ.get("TEQUILA_KEY")
 
@@ -23,7 +20,9 @@ tequila_header = {
 data_manager = DataManager()
 notification_manager = NotificationManager()
 flight_search = FlightSearch()
+customer_data = data_manager.get_emails()
 sheet_data = data_manager.get_destination_data()
+
 
 
 if sheet_data[0]["IATA Code"] == "":
@@ -60,4 +59,7 @@ for destination in sheet_data:
                   f"to {flight.destination_city} -{flight.destination_airport}" \
                   f" from {flight.out_date} to {flight.return_date} "
 
-        notification_manager.send_text(message)
+        link = flight.link
+
+        notification_manager.send_sms(message)
+        notification_manager.send_email(message,customer_data,link)
