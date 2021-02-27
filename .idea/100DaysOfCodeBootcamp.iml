@@ -7,6 +7,6 @@
     <orderEntry type="jdk" jdkName="Python 3.9 (100DaysOfCodeBootcamp)" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="100-Days-Of-Code" />
-    <orderEntry type="module" module-name="CV" />
+    <orderEntry type="module" module-name="DamnationPlaylist" />
   </component>
 </module>
