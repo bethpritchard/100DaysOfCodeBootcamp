@@ -27,7 +27,19 @@ password_box.send_keys(password)
 
 password_box.send_keys(Keys.ENTER)
 
-time.sleep(15)
+time.sleep(6)
 
-first_job = driver.find_element_by_class_name("jobs-save-button artdeco-button artdeco-button--3 artdeco-button--secondary")
-first_job.click()
+
+chat_min = driver.find_element_by_xpath('//*[@id="ember237"]')
+chat_min.click()
+
+job_listings = driver.find_elements_by_css_selector('.job-card-container--clickable')
+listing_no = len(job_listings)
+
+for i in range(listing_no):
+    job = job_listings[i]
+    job.click()
+    time.sleep(1)
+    save = driver.find_element_by_class_name("jobs-save-button")
+    save.click()
+
