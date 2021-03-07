@@ -24,3 +24,18 @@ These are projects from 100 Days of Code Python [Udemy Course](https://www.udemy
 * [Day 32 - Birthday wisher](Day32/birthday_wisher/birthday_wisher_main.py)
 * [Day 33 - ISS notifier](Day33/iss_notifier_main.py)
 * [Day 34- UI version of quiz](Day34)
+* [Day 35 - Weather notifier](Day35/current_weather_challenge.py)
+* [Day 36 - Stock notifier](Day36)
+* [Day 37 - Habit Tracker](Day37/habit_tracker_main.py)
+* [Day 38 - Workout tracker](Day38/workout_tracker.py) 
+* [Day 39 - Flight club](https://github.com/bethpritchard/100DaysOfCodeBootcamp/blob/master/Day39)
+* [Day 41-44 - HTML/CSS - CV website](https://github.com/bethpritchard/CV)
+* [Day 41-44 - HTML/CSS - Personal Site](https://github.com/bethpritchard/bethpritchard.github.io)
+* [Day 45 - 100 Movies](https://github.com/bethpritchard/100DaysOfCodeBootcamp/blob/master/Day45/100_movies.py)
+* [Day 46 - Spotify time travel](https://github.com/bethpritchard/100DaysOfCodeBootcamp/blob/master/Day46)
+* [Day 47 - Amazon bot](https://github.com/bethpritchard/100DaysOfCodeBootcamp/blob/master/Day47/amazon_bot.py)
+* [Day 48 - Cookie clicker game](https://github.com/bethpritchard/100DaysOfCodeBootcamp/blob/master/Day48/cookie_clicker.py)
+* [Day 49 - LinkedIn Applier](https://github.com/bethpritchard/100DaysOfCodeBootcamp/blob/master/Day49/linkedin_applier.py)
+* Day 50-52 skipped as they involved signing up for Tinder/Twitter/Instagram accounts which I didn't want to do
+* [Day 53 - Data entry bot](https://github.com/bethpritchard/100DaysOfCodeBootcamp/tree/master/Day53)
+    
