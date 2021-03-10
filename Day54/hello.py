@@ -14,7 +14,7 @@ def make_emphasis(function):
 
 def make_italic(f):
     def wrapper():
-        return "<em>" + function() + "</em>"
+        return "<em>" + f() + "</em>"
     return wrapper
 
 
