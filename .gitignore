@@ -3,5 +3,5 @@ Day29/__pycache__/password_generator.cpython-39.pyc
 *.pyc
 /Day46/token.txt
 Day58/node_modules
-
+Day58/package-lock.json
 
