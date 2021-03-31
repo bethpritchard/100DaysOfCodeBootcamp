@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template,request
 import requests
 
 app = Flask(__name__)
@@ -29,6 +29,17 @@ def display_post(index):
         if blog_post["id"] == index:
             requested_post= blog_post
     return render_template("post.html", post=requested_post)
+
+
+@app.route("/form-entry", methods=["POST"])
+def receive_data():
+    print(request.form["name"])
+    print(request.form["email address"])
+    print(request.form["phone number"])
+    print(request.form["message"])
+    return "<H1> Success! </H1>"
+
+
 
 if __name__ == "__main__":
     app.run(debug=True)
