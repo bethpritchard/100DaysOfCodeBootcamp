@@ -6,10 +6,12 @@
 </head>
 <body>
 
-<form>
-    <label>name:</label><input type="text" value="name">
-    <label>password: </label><input type="text" value="password">
-    <input type="submit" value="ok">
+<form action="{{url_for('login')}}" method="post">
+    <label>name:</label>
+    <input type="text" placeholder="name"  name="username">
+    <label>password: </label>
+    <input type="text" placeholder="password" name="password"">
+    <button type="submit">Ok</button>
 </form>
 </body>
 </html>
