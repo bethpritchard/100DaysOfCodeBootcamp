@@ -1,25 +1,13 @@
-<!DOCTYPE HTML>
+{% extends 'bootstrap/base.html' %}
+{% import "bootstrap/wtf.html" as wtf %}
 
-<html>
-	<head>
-		<title>Login</title>
-	</head>
+{% block title %}
+Login
+{% endblock %}
 
-	<body>
-        <div class="container">
+{% block content %}
+<div class="container">
 		<h1>Login</h1>
-
-			<form method="POST" action="{{url_for('login')}}">
-				{{ form.csrf_token }}
-				<p>
-					{{ form.email.label }} <br> {{ form.email(size=30) }}
-				</p>
-       			<p>
-					{{ form.password.label }} <br> {{ form.password(size=30) }}
-				</p>
-				{{ form.submit}}
-</form>
-
-        </div>
-	</body>
-</html>
+        {{ wtf.quick_form(form) }}
+    </div>
+{% endblock %}
