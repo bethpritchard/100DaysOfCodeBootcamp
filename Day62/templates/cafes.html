@@ -27,7 +27,13 @@
                 <tr>
                     <th scope="row">{{cafe[0]}}</th>
                     {% for i in range(1,cafe|length) %}
-                    <td>{{cafe[i]}}</td>
+                        {% if 'http' in cafe[i] %}
+                        <td><a href={{cafe[i]}}>Map Link</a></td>
+                        {% else %}
+                        <td>{{cafe[i]}}</td>
+                        {% endif %}
+
+
                     {% endfor %}
 
                 </tr>
