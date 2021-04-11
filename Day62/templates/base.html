@@ -1,12 +1,8 @@
-<!doctype html>
-<html>
-  <head>
-    {% block head %}
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-    <title>{% block title %}{% endblock %}</title>
-    {% endblock %}
-  </head>
-  <body>
-    <div id="content">{% block content %}{% endblock %}</div>
-  </body>
-</html>
+{% extends 'bootstrap/base.html' %}
+{% block head %}
+
+{% block styles %}
+{{ super() }}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+{% endblock %}
+{% endblock %}
