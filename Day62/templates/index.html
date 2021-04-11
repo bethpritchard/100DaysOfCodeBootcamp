@@ -1,12 +1,8 @@
-{% extends 'bootstrap/base.html' %}
+{% extends 'base.html' %}
 
-{% block styles %}
-{{ super() }}
-<link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
-{% endblock %}
-
-{% block header %}
-<title>Add Cafe</title>
+{% block head %}
+{{super()}}
+<title> Cafes and Wifi</title>
 {% endblock %}
 
 {% block content %}
