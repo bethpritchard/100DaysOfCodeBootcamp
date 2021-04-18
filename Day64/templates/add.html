@@ -1,4 +1,5 @@
 {% extends 'bootstrap/base.html' %}
+{% import "bootstrap/wtf.html" as wtf %}
 
 {% block styles %}
   {{ super() }}
@@ -9,8 +10,21 @@
 
 {% block title %}Add Movie{% endblock %}
 
+
+
 {% block content %}
+
 <div class="content">
     <h1 class="heading">Add a Movie</h1>
+
+
+  {{ wtf.quick_form(form) }}
+
+
 </div>
+
+  {% if valid == False: %}
+
+  <p>Please enter valid film title</p>
+  {% endif %}
 {% endblock %}
