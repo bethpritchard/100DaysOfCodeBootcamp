@@ -7,6 +7,11 @@ from wtforms.validators import DataRequired
 import os
 import requests
 
+API_URL = "https://api.themoviedb.org/3/search/movie?"
+API_KEY = os.environ.get("API_KEY")
+IMG_URL = "https://image.tmdb.org/t/p/w500"
+print(API_KEY)
+
 app = Flask(__name__)
 app.config['SECRET_KEY'] = os.environ.get("SECRET_KEY")
 Bootstrap(app)
@@ -24,14 +29,12 @@ class Movie(db.Model):
     title = db.Column(db.String(250), unique=True, nullable=False)
     year = db.Column(db.Integer, unique=False, nullable=False)
     description = db.Column(db.String(500), unique=False, nullable=False)
-    rating = db.Column(db.Float, unique=False, nullable=False)
-    ranking = db.Column(db.Integer, unique=False, nullable=False)
-    review = db.Column(db.String(250), unique=False, nullable=False)
+    rating = db.Column(db.Float, nullable=True)
+    ranking = db.Column(db.Integer, nullable=True)
+    review = db.Column(db.String(250), nullable=True)
     img_url = db.Column(db.String(250), unique=False, nullable=False)
 
-
 db.create_all()
-
 
 # CREATE FORM
 
@@ -39,6 +42,12 @@ class EditRatingForm(FlaskForm):
     rating = StringField(label="Rating", validators=[DataRequired()])
     review = StringField(label="Your Review")
     submit = SubmitField("Done")
+
+
+class AddMovieForm(FlaskForm):
+    title = StringField(label="Movie title", validators=[DataRequired()])
+    submit = SubmitField("Add movie")
+
 
 #
 # new_movie = Movie(
@@ -57,7 +66,10 @@ class EditRatingForm(FlaskForm):
 
 @app.route("/")
 def home():
-    all_movies = db.session.query(Movie).all()
+    all_movies = Movie.query.order_by(Movie.rating).all()
+    for i in range(len(all_movies)):
+        all_movies[i].ranking = len(all_movies) - i
+    db.session.commit()
     return render_template("index.html", movies=all_movies)
 
 
@@ -83,6 +95,50 @@ def delete_movie():
     db.session.delete(movie)
     db.session.commit()
     return redirect(url_for('home'))
+
+
+@app.route("/add", methods=["GET", "POST"])
+def add_movie():
+    form = AddMovieForm()
+    if form.validate_on_submit():
+        movie_title = form.title.data
+        print(movie_title)
+        params = {
+            "api_key": API_KEY,
+            "query": movie_title
+        }
+        response = requests.get(API_URL, params=params)
+        data = response.json()["results"]
+        print(data)
+        if len(data) == 0:
+            return render_template("add.html", form=form, valid=False)
+        else:
+            return render_template("select.html", all_movies=data)
+
+    return render_template("add.html", form=form, valid=True)
+
+
+@app.route("/find", methods=["GET", "POST"])
+def find_movie():
+    movie_api_id = request.args.get("id")
+    if movie_api_id:
+        movie_url = f"https://api.themoviedb.org/3/movie/{movie_api_id}"
+        params = {
+            "api_key": API_KEY,
+        }
+        response = requests.get(movie_url, params=params)
+        data = response.json()
+
+        new_movie = Movie(title=data["title"],
+                          year=data["release_date"][:4],
+                          description=data["overview"],
+                          img_url=IMG_URL + data["poster_path"])
+        db.session.add(new_movie)
+        db.session.commit()
+
+        return redirect(url_for('rate_movie', id=new_movie.id))
+
+
 
 
 if __name__ == '__main__':
