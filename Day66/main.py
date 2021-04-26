@@ -2,7 +2,6 @@ from flask import Flask, jsonify, render_template, request
 from flask_sqlalchemy import SQLAlchemy
 import random
 
-
 app = Flask(__name__)
 
 ##Connect to Database
@@ -32,7 +31,7 @@ class Cafe(db.Model):
 @app.route("/")
 def home():
     return render_template("index.html")
-    
+
 
 ## HTTP GET - Read Record
 @app.route("/random")
@@ -42,11 +41,13 @@ def get_random_cafe():
 
     return jsonify(random_cafe.to_dict())
 
+
 @app.route("/all")
 def get_all_cafes():
     cafes = db.session.query(Cafe).all()
     print([cafe.to_dict() for cafe in cafes])
     return jsonify(cafes=[cafe.to_dict() for cafe in cafes])
+
 
 @app.route("/search")
 def search():
@@ -57,11 +58,45 @@ def search():
     else:
         return jsonify(error={"Not Found": "Sorry, we don't have a cafe at that location."})
 
+
 ## HTTP POST - Create Record
+def make_bool(val: int) -> bool:
+    return bool(int(val))
+
+
+@app.route("/add", methods=["POST"])
+def post_new_cafe():
+    new_cafe = Cafe(
+        name=request.form.get("name"),
+        map_url=request.form.get("map_url"),
+        img_url=request.form.get("img_url"),
+        location=request.form.get("loc"),
+        has_sockets=make_bool(request.form.get("sockets")),
+        has_toilet=make_bool(request.form.get("toilet")),
+        has_wifi=make_bool(request.form.get("wifi")),
+        can_take_calls=make_bool(request.form.get("calls")),
+        seats=request.form.get("seats"),
+        coffee_price= "£" + request.form.get("coffee_price"),
+    )
+    db.session.add(new_cafe)
+    db.session.commit()
+    return jsonify(response={"success": "Successfully added the new cafe."})
+
 
 ## HTTP PUT/PATCH - Update Record
+@app.route("/update-price/<int:cafe_id>",methods=["PATCH"])
+def update_price(cafe_id):
+    cafe = db.session.query(Cafe).get(cafe_id)
+    if cafe:
+        new_price = "£" + request.args.get("new_price")
+        cafe.coffee_price = new_price
+        db.session.commit()
 
-## HTTP DELETE - Delete Record
+        return jsonify(response={"success": "Successfully updated the price"}),200
+    else:
+        return jsonify(error={"Error": "Successfully updated the price"}),404
+
+# HTTP DELETE - Delete Record
 
 
 if __name__ == '__main__':
