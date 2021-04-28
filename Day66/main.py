@@ -97,10 +97,10 @@ def update_price(cafe_id):
         return jsonify(error={"Error": "Could not update price"}),404
 
 # HTTP DELETE - Delete Record
-    book_id = 1
-    book_to_delete = Book.query.get(book_id)
-    db.session.delete(book_to_delete)
-    db.session.commit()
+#     book_id = 1
+#     book_to_delete = Book.query.get(book_id)
+#     db.session.delete(book_to_delete)
+#     db.session.commit()
 
 @app.route("/report-closed/<int:cafe_id>",methods=["DELETE"])
 def delete_cafe(cafe_id):
