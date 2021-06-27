@@ -3,7 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/100DaysOfCodeBootcamp.iml" filepath="$PROJECT_DIR$/.idea/100DaysOfCodeBootcamp.iml" />
-      <module fileurl="file://$PROJECT_DIR$/../SQLlite_practice/.idea/SQLlite_practice.iml" filepath="$PROJECT_DIR$/../SQLlite_practice/.idea/SQLlite_practice.iml" />
     </modules>
   </component>
 </project>
