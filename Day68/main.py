@@ -5,7 +5,7 @@ from flask_login import UserMixin, login_user, LoginManager, login_required, cur
 
 app = Flask(__name__)
 
-app.config['SECRET_KEY'] = 'any-secret-key-you-choose'
+app.config['SECRET_KEY'] = 'password1'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///users.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
@@ -25,19 +25,33 @@ def home():
     return render_template("index.html")
 
 
-@app.route('/register')
+@app.route('/register', methods = ["GET", "POST"])
 def register():
+    if request.method == 'POST':
+
+        new_user = User(
+            name=request.form.get("name"),
+            email = request.form.get('email'),
+            password = request.form.get("password")
+        )
+
+        db.session.add(new_user)
+        db.session.commit()
+        print("New user added")
+
+        return redirect(url_for("secrets",name = new_user.name))
     return render_template("register.html")
 
 
-@app.route('/login')
+@app.route('/login',methods = ["GET", "POST"])
 def login():
     return render_template("login.html")
 
 
 @app.route('/secrets')
 def secrets():
-    return render_template("secrets.html")
+    name = request.args['name']
+    return render_template("secrets.html", name = name)
 
 
 @app.route('/logout')
