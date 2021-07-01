@@ -37,6 +37,10 @@ def home():
 @app.route('/register', methods = ["GET", "POST"])
 def register():
     if request.method == 'POST':
+        if User.query.filter_by(email=request.form.get('email')).first():
+            # User already exists
+            flash("You've already signed up with that email, log in instead!")
+            return redirect(url_for('login'))
 
         password_hashed = generate_password_hash(
             request.form.get("password"),
@@ -70,17 +74,23 @@ def login():
         password = request.form.get("password")
 
         user = User.query.filter_by(email=email).first()
+        if not user:
+            flash("Email incorrect")
 
+
+        else:
         #Check stored password hash against entered password hashed.
-        if check_password_hash(user.password, password):
-            login_user(user)
-            return redirect(url_for('secrets'))
+            if check_password_hash(user.password, password):
+                login_user(user)
+                return redirect(url_for('secrets'))
+            else:
+                flash("Password incorrect")
 
     return render_template("login.html")
 
 
-@login_required
 @app.route('/secrets')
+@login_required
 def secrets():
     return render_template("secrets.html")
 
@@ -92,6 +102,7 @@ def logout():
 
 
 @app.route('/download')
+@login_required
 def download():
     return send_from_directory('static',filename="files/cheat_sheet.pdf")
 
