@@ -14,9 +14,11 @@ db = SQLAlchemy(app)
 login_manager = LoginManager()
 login_manager.init_app(app)
 
+
 @login_manager.user_loader
 def load_user(user_id):
-    return User.get(user_id)
+    return User.query.get(user_id)
+
 
 ##CREATE TABLE IN DB
 class User(UserMixin, db.Model):
@@ -24,7 +26,6 @@ class User(UserMixin, db.Model):
     email = db.Column(db.String(100), unique=True)
     password = db.Column(db.String(100))
     name = db.Column(db.String(1000))
-#Line below only required once, when creating DB. 
 # db.create_all()
 
 
@@ -50,22 +51,30 @@ def register():
         db.session.add(new_user)
 
         # Log in an authenticate user
-        login_user(new_user)
 
         db.session.commit()
+
+        login_user(new_user)
+
         print("New user added")
 
-        return redirect(url_for("secrets",name = new_user.name))
+        return redirect(url_for("secrets"))
+
     return render_template("register.html")
 
 
 @app.route('/login',methods = ["GET", "POST"])
 def login():
     if request.method == "POST":
-        email = request.form.get("name")
+        email = request.form.get("email")
         password = request.form.get("password")
 
+        user = User.query.filter_by(email=email).first()
 
+        #Check stored password hash against entered password hashed.
+        if check_password_hash(user.password, password):
+            login_user(user)
+            return redirect(url_for('secrets'))
 
     return render_template("login.html")
 
