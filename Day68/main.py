@@ -1,3 +1,4 @@
+import werkzeug.security
 from flask import Flask, render_template, request, url_for, redirect, flash, send_from_directory
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_sqlalchemy import SQLAlchemy
@@ -9,6 +10,13 @@ app.config['SECRET_KEY'] = 'password1'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///users.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
+
+login_manager = LoginManager()
+login_manager.init_app(app)
+
+@login_manager.user_loader
+def load_user(user_id):
+    return User.get(user_id)
 
 ##CREATE TABLE IN DB
 class User(UserMixin, db.Model):
@@ -29,13 +37,21 @@ def home():
 def register():
     if request.method == 'POST':
 
+        password_hashed = generate_password_hash(
+            request.form.get("password"),
+            method="pbkdf2:sha256",
+            salt_length=8)
+
         new_user = User(
             name=request.form.get("name"),
-            email = request.form.get('email'),
-            password = request.form.get("password")
+            email=request.form.get('email'),
+            password = password_hashed
         )
-
         db.session.add(new_user)
+
+        # Log in an authenticate user
+        login_user(new_user)
+
         db.session.commit()
         print("New user added")
 
@@ -45,13 +61,20 @@ def register():
 
 @app.route('/login',methods = ["GET", "POST"])
 def login():
+    if request.method == "POST":
+        email = request.form.get("name")
+        password = request.form.get("password")
+
+
+
     return render_template("login.html")
 
 
+@login_required
 @app.route('/secrets')
 def secrets():
-    name = request.args['name']
-    return render_template("secrets.html", name = name)
+    return render_template("secrets.html", name = current_user.name)
+
 
 
 @app.route('/logout')
